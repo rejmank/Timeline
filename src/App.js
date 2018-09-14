@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import {BrowserRouter,
+        Route,
+      Switch} from 'react-router-dom';
 import './App.css';
+import Login from './components/login/login.jsx';
+import Timeline from './components/timeline/timeline.jsx';
+import Search from './components/search/search.jsx';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-      </div>
+      <BrowserRouter>
+        <div className="App">
+        <Switch>
+           <Route path="/search" component={Search} />
+           <Route path='/timeline/:token' component={Timeline}/>
+           <Route exact path="/" component={Login}/>
+           <Route exact path="/:token/" component={Login}/>
+        </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
