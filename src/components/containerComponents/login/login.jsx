@@ -16,7 +16,6 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    if (this.props.location) {
       if (this.props.location.hash !== "") {
         const params = queryString.parse(this.props.location.hash);
         console.log(params);
@@ -27,9 +26,11 @@ class Login extends Component {
           error: false
         });
       } else {
-        // do nothing
+        console.log('else');
+        if(sessionStorage.getItem('access_token')) {
+          this.props.history.push('/search');
+        }
       }
-    }
   }
 
   render() {

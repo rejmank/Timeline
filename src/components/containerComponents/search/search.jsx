@@ -26,7 +26,7 @@ class Search extends Component{
             this.setState({
                 token: sessionStorage.getItem('access_token')
             })
-        }else {
+        } else {
             this.props.history.push(`/`);
         }
 
@@ -47,7 +47,7 @@ class Search extends Component{
     renderSearchResult = () => { 
         if(this.state.results.length > 0) {
            return this.state.results.map((res)=> {
-                return <Link key={res.id} to={'/timeline/bandId?=' + res.id}> <div >{res.name}</div> </Link>
+                return <Link key={res.id} to={'/timeline/' + res.id}> <div >{res.name}</div> </Link>
             })  
         } else {  
            return this.state.searchTerm.length >= 2 ? <div>No band with this name :(</div> : null
@@ -57,7 +57,6 @@ class Search extends Component{
     searchOnSpotify = (val) => {     
         this.setState({
           searchTerm : val.target.value,
-          results : []
         });
         if(val.target.value.length >= 2) {
           axios.get(address + val.target.value + '&type=artist',{
