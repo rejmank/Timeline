@@ -1,9 +1,20 @@
 import React, {Component} from 'react';
 import {Route, RouteWithProps, Link} from 'react-router-dom';
 import axios from 'axios';
-import Timeline from '../timeline/timeline';
+import styled from 'styled-components';
+import SearchResult, {StyledDiv} from '../../viewComponents/searchResult';
 
 const address = 'https://api.spotify.com/v1/search?q='
+
+
+const InputStyled = styled.input`
+    width: 80%;
+    font-size: 5em;
+    border: none;
+    border-bottom: solid 2px black;
+    outline: none;
+    padding-top: 15px;
+`
 
 // TODO handle outdated acess token
 // TODO add search state
@@ -34,12 +45,12 @@ class Search extends Component{
 
     render(){
         return (<div>
-                  <input value={this.state.searchTerm} onChange={(val) => this.searchOnSpotify(val)}   />
+                  <InputStyled placeholder='Search for band' value={this.state.searchTerm} onChange={(val) => this.searchOnSpotify(val)}   />
                   {
                     this.renderSearchResult()
                   }
                   {
-                    this.state.error?  <div>Something went wrong... </div> : null
+                    this.state.error?  <StyledDiv>Something went wrong... </StyledDiv> : null
                 }
             </div>)
     }
@@ -47,14 +58,14 @@ class Search extends Component{
     renderSearchResult = () => { 
         if(this.state.results.length > 0) {
            return this.state.results.map((res)=> {
-                return <Link key={res.id} to={'/timeline/' + res.id}> <div >{res.name}</div> </Link>
+                return <SearchResult key={res.id} id={res.id} bandName={res.name} />
             })  
         } else {  
-           return this.state.searchTerm.length >= 2 ? <div>No band with this name :(</div> : null
+           return this.state.searchTerm.length >= 2 ? <StyledDiv>No band with this name :(</StyledDiv> : null
         } 
     }
 
-    searchOnSpotify = (val) => {     
+    searchOnSpotify = (val) => {  
         this.setState({
           searchTerm : val.target.value,
         });

@@ -4,6 +4,23 @@ import queryString from "query-string";
 import Album from "../../viewComponents/album";
 import Space from "../../viewComponents/space";
 import { Link } from "react-router-dom";
+import styled from 'styled-components';
+
+const StyledH1 = styled.h1`
+font-size 6em;`
+
+
+const BackButton = styled.div`
+  font-size: 2em;
+  text-align: left;
+  padding-left: 70px;
+  padding-top: 25px;
+`
+
+const StyledLink = styled(Link)`
+text-decoration: none;
+width: 80%;
+`
 
 const route = "https://api.spotify.com/v1/artists/";
 
@@ -53,10 +70,10 @@ class Timeline extends Component {
   render() {
     return (
       <div>
-        <Link to="/search">
-          <div>Back</div>
-        </Link>
-        <h1>This is band timeline</h1>
+        <StyledLink to="/search">
+          <BackButton>Back</BackButton>
+        </StyledLink>
+        <StyledH1>This is band timeline</StyledH1>
         {this.state.albums ? (
           this.state.albums.map((album, i) => {
             return (
@@ -82,10 +99,6 @@ class Timeline extends Component {
     if (firstIndex != this.state.albums.length - 1) {
       const first = new Date(this.state.albums[firstIndex].release_date).getFullYear();
       const second = new Date(this.state.albums[firstIndex + 1].release_date).getFullYear();
-      console.log(first)
-      console.log(second);
-      console.log('---------');
-      // convert miliseconds to years
       return (first - second);
     }
   };
