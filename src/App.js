@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import {BrowserRouter,
         Route,
-      Switch} from 'react-router-dom';
+        Switch} from 'react-router-dom';
 import './App.css';
-import Login from './components/containerComponents/login/login.jsx';
-import Timeline from './components/containerComponents/timeline/timeline.jsx';
-import Search from './components/containerComponents/search/search.jsx';
+import Login from './components/containerComponents/login.jsx';
+import Timeline from './components/containerComponents/timeline.jsx';
+import Search from './components/containerComponents/search.jsx';
 
 class App extends Component {
   render() {

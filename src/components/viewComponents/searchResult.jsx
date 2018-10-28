@@ -1,28 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom'
+import {StyledLink, StyledDiv} from '../styles';
+import {WithLoading} from '../containerComponents/withLoading'
 
-const StyledDiv = styled.div`
-    font-size: 3em;
-    border: none;
-    text-align: center;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    color: black;
-    border-bottom: none;
-    
-`
-const StyledLink = styled(Link)`
-    text-decoration: none;
-    width: 80%;
-`
 
 const SearchResult = (props) => {
+    console.log(props)
     return (
+        
     <StyledLink to={'/timeline/' + props.id}>
         <StyledDiv>
-            {props.bandName}
+            {props.name}
         </ StyledDiv>
     </StyledLink>
     )
@@ -33,5 +21,17 @@ SearchResult.propTypes = {
     id: PropTypes.string
 }
 
-export {StyledDiv};
-export default SearchResult;
+function renderSearchResult(props) { 
+    console.log('renderSR',props);
+    console.log(props.props.length);
+    if(props.props.length > 0) {
+        console.log('true')
+       return true
+    } else {  
+        console.log('false')
+       return false
+    } 
+}
+
+const WithMapedLoading = WithLoading(SearchResult, renderSearchResult, 'something' );
+export default WithMapedLoading;

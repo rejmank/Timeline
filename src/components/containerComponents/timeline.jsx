@@ -1,26 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import queryString from "query-string";
-import Album from "../../viewComponents/album";
-import Space from "../../viewComponents/space";
-import { Link } from "react-router-dom";
-import styled from 'styled-components';
-
-const StyledH1 = styled.h1`
-font-size 6em;`
+import Album from "../viewComponents/album";
+import Space from "../viewComponents/space";
+import {BackButton, StyledH1, StyledLink} from '../styles';
 
 
-const BackButton = styled.div`
-  font-size: 2em;
-  text-align: left;
-  padding-left: 70px;
-  padding-top: 25px;
-`
-
-const StyledLink = styled(Link)`
-text-decoration: none;
-width: 80%;
-`
 
 const route = "https://api.spotify.com/v1/artists/";
 
